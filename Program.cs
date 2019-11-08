@@ -18,11 +18,11 @@ namespace KnapsackTB
             double SOGUMA_DERECESI = 0;
             int ADIM_SAYISI = 0;
 
-            List<Esya> elemanlar = new List<Esya>();
-            elemanlar.Add(new Esya(22, 30));
-            elemanlar.Add(new Esya(15, 20));
-            elemanlar.Add(new Esya(11, 3));
-            elemanlar.Add(new Esya(1, 2));
+            List<Eleman> elemanlar = new List<Eleman>();
+            elemanlar.Add(new Eleman(22, 30));
+            elemanlar.Add(new Eleman(15, 20));
+            elemanlar.Add(new Eleman(11, 3));
+            elemanlar.Add(new Eleman(1, 2));
 
             TavlamaBenzetimi tb = new TavlamaBenzetimi(elemanlar, kapasite);
 

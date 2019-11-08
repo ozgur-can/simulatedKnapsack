@@ -7,42 +7,41 @@ using System.Threading.Tasks;
 
 namespace KnapsackTB
 {
-    class TavlamaBenzetimi
+    public class TavlamaBenzetimi
     {
         private int kapasite;
-        private List<Esya> esyalar = new List<Esya>();
+        private List<Eleman> elemanlar = new List<Eleman>();
 
         public int Kapasite { get => kapasite; set => kapasite = value; }
-        internal List<Esya> Esyalar { get => esyalar; set => esyalar = value; }
+        public List<Eleman> Elemanlar { get => elemanlar; set => elemanlar = value; }
 
-        public TavlamaBenzetimi(List<Esya> esyalar, int kapasite)
+        public TavlamaBenzetimi(List<Eleman> elemanlar, int kapasite)
         {
             Kapasite = kapasite;
-            Esyalar = esyalar;
+            Elemanlar = elemanlar;
         }
 
-        internal List<int> IlkCozum()
+        public List<int> IlkCozum()
         {
             List<int> ilkCozum = new List<int>();
             List<int> tempCozum = new List<int>();
             List<int> indisler = new List<int>();
             int temp = 0;
 
-            for (int i = 0; i < Esyalar.Count; i++)
+            for (int i = 0; i < Elemanlar.Count; i++)
                 indisler.Add(i);
 
             while (indisler.Count > 0)
             {
                 temp = RastgeleSayiGetir(indisler.Count);
                 tempCozum.Add(indisler.ElementAt(temp));
-                indisler.RemoveAt(temp);
+
                 if (HacimHesapla(tempCozum) < Kapasite)
-                    ilkCozum.Add(temp);
+                    ilkCozum.Add(indisler.ElementAt(temp));
+
+                indisler.RemoveAt(temp);
             }
-
-            //foreach (var i in ilkCozum)
-            //    Console.WriteLine(i);
-
+            
             return ilkCozum;
         }
 
@@ -51,7 +50,7 @@ namespace KnapsackTB
             int hacim = 0;
 
             foreach (int esya in list)
-                hacim += Esyalar.ElementAt(esya).Agirlik;
+                hacim += Elemanlar.ElementAt(esya).Agirlik;
             return hacim;
         }
 
@@ -60,11 +59,11 @@ namespace KnapsackTB
             int deger = 0;
 
             foreach (int esya in list)
-                deger += Esyalar.ElementAt(esya).Deger;
+                deger += Elemanlar.ElementAt(esya).Deger;
             return deger;
         }
 
-        internal int RastgeleSayiGetir(int sinirDeger)
+        private int RastgeleSayiGetir(int sinirDeger)
         {
             Random a = new Random();
 

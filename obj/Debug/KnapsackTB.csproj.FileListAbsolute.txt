@@ -5,3 +5,10 @@ C:\Users\ozgur\source\repos\KnapsackTB\obj\Debug\KnapsackTB.csprojAssemblyRefere
 C:\Users\ozgur\source\repos\KnapsackTB\obj\Debug\KnapsackTB.csproj.CoreCompileInputs.cache
 C:\Users\ozgur\source\repos\KnapsackTB\obj\Debug\KnapsackTB.exe
 C:\Users\ozgur\source\repos\KnapsackTB\obj\Debug\KnapsackTB.pdb
+C:\Users\ozgur\Desktop\simulatedKnapsack\bin\Debug\KnapsackTB.exe.config
+C:\Users\ozgur\Desktop\simulatedKnapsack\bin\Debug\KnapsackTB.exe
+C:\Users\ozgur\Desktop\simulatedKnapsack\bin\Debug\KnapsackTB.pdb
+C:\Users\ozgur\Desktop\simulatedKnapsack\obj\Debug\KnapsackTB.csprojAssemblyReference.cache
+C:\Users\ozgur\Desktop\simulatedKnapsack\obj\Debug\KnapsackTB.csproj.CoreCompileInputs.cache
+C:\Users\ozgur\Desktop\simulatedKnapsack\obj\Debug\KnapsackTB.exe
+C:\Users\ozgur\Desktop\simulatedKnapsack\obj\Debug\KnapsackTB.pdb

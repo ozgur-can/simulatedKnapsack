@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace KnapsackTB
 {
-    class Esya
+    public class Eleman
     {
         private int agirlik;
         private int deger;
 
-        internal Esya(int agirlik, int deger)
+        public Eleman(int agirlik, int deger)
         {
             Agirlik = agirlik;
             Deger = deger;

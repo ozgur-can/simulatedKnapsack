@@ -43,7 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Esya.cs" />
+    <Compile Include="Deneme.cs" />
+    <Compile Include="Eleman.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TavlamaBenzetimi.cs" />

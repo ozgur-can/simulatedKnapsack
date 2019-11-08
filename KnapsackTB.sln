@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackTB", "KnapsackTB.csproj", "{ADC1A34A-3CAB-47D1-BA2B-BD42B31D3098}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackTB.UnitTests", "KnapsackTB.UnitTests\KnapsackTB.UnitTests.csproj", "{C82C9585-B67B-41ED-9EF9-121C1166C03F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{C154243A-9F19-4FF6-9C77-305431AAD5BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,16 @@ Global
 		{ADC1A34A-3CAB-47D1-BA2B-BD42B31D3098}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADC1A34A-3CAB-47D1-BA2B-BD42B31D3098}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADC1A34A-3CAB-47D1-BA2B-BD42B31D3098}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C82C9585-B67B-41ED-9EF9-121C1166C03F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C82C9585-B67B-41ED-9EF9-121C1166C03F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C82C9585-B67B-41ED-9EF9-121C1166C03F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C82C9585-B67B-41ED-9EF9-121C1166C03F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C82C9585-B67B-41ED-9EF9-121C1166C03F} = {C154243A-9F19-4FF6-9C77-305431AAD5BA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5896D858-9EF2-4316-B860-FC6CCDB5E502}
