@@ -10,14 +10,17 @@ namespace KnapsackTB
     {
         private int agirlik;
         private int deger;
+        private int indis;
 
-        public Eleman(int agirlik, int deger)
+        public Eleman(int agirlik, int deger, int indis)
         {
             Agirlik = agirlik;
             Deger = deger;
+            Indis = indis;
         }
 
         public int Agirlik { get => agirlik; set => agirlik = value; }
         public int Deger { get => deger; set => deger = value; }
+        public int Indis { get => indis; set => indis = value; }
     }
 }
