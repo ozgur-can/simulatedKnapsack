@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace KnapsackTB.UnitTests
 {
     [TestClass]
-    public class IlkCozumTest
+    public class RandomTest
     {
         [TestMethod]
         public void Test()
@@ -21,12 +21,15 @@ namespace KnapsackTB.UnitTests
             double DURDURMA_SICAKLIGI = 0;
 
             TavlamaBenzetimi sa = new TavlamaBenzetimi(elemanlar, kapasite, BASLANGIC_SICAKLIGI, DURDURMA_SICAKLIGI);
-            int toplam = 0;
-            foreach (var eleman in sa.IlkCozum())
-                toplam += eleman;
+            int num1 = sa.RastgeleSayiGetir(10);
+            int num2 = sa.RastgeleSayiGetir(10);
+            Assert.AreEqual(num1, num2);
 
-            Assert.IsTrue(toplam < kapasite);
+            //int toplam = 0;
+            //foreach (var eleman in sa.IlkCozum())
+            //    toplam += eleman;
+
+            //Assert.IsTrue(toplam < kapasite);
         }
-
     }
 }

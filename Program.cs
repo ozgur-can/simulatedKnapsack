@@ -35,7 +35,19 @@ namespace KnapsackTB
 
             tb.Tavlama(tb.IlkCozum());
 
+            //name_list2 = DeepCopy<List<string>>(name_list1);
+            //List<int> ne = new List<int>();
+            //List<int> ne2 = new List<int>();
+            //ne2.Add(12);
+            //ne = Deneme(ne2);
+            //ne = tb.DeepCopy<List<int>>(ne2);
+
             Console.ReadKey();
+        }
+
+        static List<int> Deneme(List<int> dene)
+        {
+            return dene;
         }
     }
 }

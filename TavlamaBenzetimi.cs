@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,11 +15,13 @@ namespace KnapsackTB
         private List<Eleman> elemanlar = new List<Eleman>();
         private double baslangicISI;
         private double durdurmaISI;
+        RastgeleSayi rastgele = new RastgeleSayi();
 
         public int Kapasite { get => kapasite; set => kapasite = value; }
         public List<Eleman> Elemanlar { get => elemanlar; set => elemanlar = value; }
         public double BaslangicISI { get => baslangicISI; set => baslangicISI = value; }
         public double DurdurmaISI { get => durdurmaISI; set => durdurmaISI = value; }
+        public RastgeleSayi Rastgele { get => rastgele; set => rastgele = value; }
 
         public TavlamaBenzetimi(List<Eleman> elemanlar, int kapasite, double baslangicISI, double durdurmaISI)
         {
@@ -49,6 +53,17 @@ namespace KnapsackTB
             }
 
             return ilkCozum;
+        }
+
+        public List<int> DeepCopy<List>(List<int> item)
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            MemoryStream stream = new MemoryStream();
+            formatter.Serialize(stream, item);
+            stream.Seek(0, SeekOrigin.Begin);
+            List<int> result = (List<int>)formatter.Deserialize(stream);
+            stream.Close();
+            return result;
         }
 
         public void Tavlama(List<int> cozum)
@@ -93,36 +108,42 @@ namespace KnapsackTB
 
         public List<int> VaryasyonlariHesapla(List<int> tempCozum)
         {
+            List<int> yedekTemp = new List<int>(tempCozum); // yedek tuttum cunku tutmazsan parametredeki listeyi guncelliyor
             //int rastgele = RastgeleSayiGetir(Elemanlar.Count);
             int rast = 0;
-            List<int> secilmemis = SecilmemislerElemanlar(tempCozum); // 2
-            List<int> secilmis = new List<int>();
+            List<int> baslangicCozum = new List<int>(yedekTemp);
+            List<int> secilmemis = SecilmemislerElemanlar(yedekTemp);
             List<int> yeniCozum = new List<int>();
+            int agirlik = 0;
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 3; i++)
             {
                 rast = RastgeleSecim(secilmemis);
-                tempCozum.Add(rast);
+                yedekTemp.Add(rast);
                 secilmemis.Remove(rast);
+                agirlik = HacimHesapla(yedekTemp);
 
-                if (AgirlikFazla(HacimHesapla(tempCozum)))
+                if (agirlik > Kapasite)
                 {
-                    secilmis = SecilmisElemanlar(tempCozum);
-                    while (AgirlikFazla(HacimHesapla(tempCozum)))
+                    while (agirlik > Kapasite)
                     {
-                        rast = RastgeleSecim(tempCozum);
-                        tempCozum.Remove(rast);
-                        yeniCozum = new List<int>(tempCozum);
-                    }
-                    if (!AgirlikFazla(HacimHesapla(tempCozum)))
-                    {
+                        rast = RastgeleSecim(yedekTemp);
+                        yedekTemp.Remove(rast);
                         secilmemis.Add(rast);
+                        yeniCozum = new List<int>(yedekTemp);
+                        agirlik = HacimHesapla(yedekTemp);
                     }
-                }//else {yeniCozum = tempCozum; break; }
-            }
 
-            foreach (var i in yeniCozum)
-                Console.WriteLine(i);
+                    var diff = yeniCozum.Except(baslangicCozum);
+                    var el = diff.Count();
+                    //bool a = !(!tempCozum.Any() && !yeniCozum.Any());
+                    if (yeniCozum.Any() && (diff.Count() != 0))
+                    {
+                        break;
+                        break;
+                    }
+                }
+            }
 
             return yeniCozum;
 
@@ -192,18 +213,9 @@ namespace KnapsackTB
             return deger;
         }
 
-        private int RastgeleSayiGetir(int sinirDeger)
+        public int RastgeleSayiGetir(int sinirDeger)
         {
-            Random a = new Random();
-
-            List<int> rastgeleSayilar = new List<int>();
-            int rastgele = 0;
-
-            rastgele = a.Next(0, sinirDeger);
-            if (!rastgeleSayilar.Contains(rastgele))
-                rastgeleSayilar.Add(rastgele);
-
-            return rastgeleSayilar[0];
+            return Rastgele.Between(0, sinirDeger - 1);
         }
 
     }

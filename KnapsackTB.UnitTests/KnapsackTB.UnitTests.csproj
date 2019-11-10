@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="IlkCozumTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
