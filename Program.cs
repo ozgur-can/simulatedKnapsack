@@ -12,7 +12,7 @@ namespace KnapsackTB
         static void Main(string[] args)
         {
 
-            int kapasite = 38; // text dosyasindan okunup buraya atanacak
+            int kapasite = 102; // text dosyasindan okunup buraya atanacak 55
             double BASLANGIC_SICAKLIGI = 100; // konsoldan alinacak
             double DURDURMA_SICAKLIGI = 0;
             //double SOGUMA_DERECESI = 0;
@@ -23,31 +23,22 @@ namespace KnapsackTB
             elemanlar.Add(new Eleman(15, 20, 1));
             elemanlar.Add(new Eleman(11, 3, 2));
             elemanlar.Add(new Eleman(1, 2, 3));
+            elemanlar.Add(new Eleman(19, 2, 4));
+            elemanlar.Add(new Eleman(5, 10, 5));
+            elemanlar.Add(new Eleman(8, 5, 6));
+
+            elemanlar.Add(new Eleman(21, 2, 7));
+            elemanlar.Add(new Eleman(12, 12, 8));
+            elemanlar.Add(new Eleman(32, 29, 9));
+            elemanlar.Add(new Eleman(32, 33, 10));
+            elemanlar.Add(new Eleman(3, 2, 11));
+            elemanlar.Add(new Eleman(1, 30, 12));
+            elemanlar.Add(new Eleman(19, 55, 13));
 
             TavlamaBenzetimi tb = new TavlamaBenzetimi(elemanlar, kapasite, BASLANGIC_SICAKLIGI, DURDURMA_SICAKLIGI);
 
-            //tb.IlkCozum();
-            //Console.WriteLine(tb.Benzetim(BASLANGIC_SICAKLIGI, DURDURMA_SICAKLIGI, SOGUMA_DERECESI, ADIM_SAYISI, tb.CozumAra()));
-
-            //tb.VaryasyonlariHesapla(deneme);
-
-            //tb.SecilmemislerElemanlar(deneme);
-
             tb.Tavlama(tb.IlkCozum());
-
-            //name_list2 = DeepCopy<List<string>>(name_list1);
-            //List<int> ne = new List<int>();
-            //List<int> ne2 = new List<int>();
-            //ne2.Add(12);
-            //ne = Deneme(ne2);
-            //ne = tb.DeepCopy<List<int>>(ne2);
-
             Console.ReadKey();
-        }
-
-        static List<int> Deneme(List<int> dene)
-        {
-            return dene;
         }
     }
 }

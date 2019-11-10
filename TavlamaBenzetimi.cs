@@ -74,12 +74,12 @@ namespace KnapsackTB
             List<int> enIyiCozum = new List<int>(cozum);
             int enIyiDeger = DegerHesapla(enIyiCozum);
 
-            List<int> yeniCozum = new List<int>();
+            List<int> yeniCozum = new List<int>(cozum);
             List<int> komsu = new List<int>();
 
             do
             {
-                komsu = VaryasyonlariHesapla(cozum);
+                komsu = VaryasyonlariHesapla(yeniCozum);
                 guncelDeger = DegerHesapla(komsu);
                 fark = DegerHesapla(komsu) - enIyiDeger;
                 if (fark >= 0)
@@ -95,14 +95,16 @@ namespace KnapsackTB
                         yeniCozum = komsu;
                     }
                 }
-                BaslangicISI -= 10;
+                BaslangicISI -= 0.1;
 
             } while ((BaslangicISI > DurdurmaISI) && (guncelDeger < enIyiDeger));
 
-            foreach (var i in enIyiCozum)
-            {
-                Console.WriteLine(i);
-            }
+
+            foreach (var i in SecilmisElemanlar(enIyiCozum))
+                Console.Write(i + " ");
+
+            Console.WriteLine("\nDegerler toplami = " + DegerHesapla(enIyiCozum));
+            Console.WriteLine("Amac Fonksiyonu Degeri = " + DegerHesapla(enIyiCozum) * HacimHesapla(enIyiCozum));
 
         }
 
@@ -134,14 +136,9 @@ namespace KnapsackTB
                         agirlik = HacimHesapla(yedekTemp);
                     }
 
-                    var diff = yeniCozum.Except(baslangicCozum);
-                    var el = diff.Count();
-                    //bool a = !(!tempCozum.Any() && !yeniCozum.Any());
-                    if (yeniCozum.Any() && (diff.Count() != 0))
-                    {
+                    var fark = yeniCozum.Except(baslangicCozum).Count();
+                    if (yeniCozum.Any() && (fark != 0))
                         break;
-                        break;
-                    }
                 }
             }
 
