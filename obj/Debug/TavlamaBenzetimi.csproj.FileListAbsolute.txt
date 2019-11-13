@@ -5,3 +5,10 @@ C:\Users\ozgur\Desktop\TavlamaBenzetimi\obj\Debug\TavlamaBenzetimi.csprojAssembl
 C:\Users\ozgur\Desktop\TavlamaBenzetimi\obj\Debug\TavlamaBenzetimi.csproj.CoreCompileInputs.cache
 C:\Users\ozgur\Desktop\TavlamaBenzetimi\obj\Debug\TavlamaBenzetimi.exe
 C:\Users\ozgur\Desktop\TavlamaBenzetimi\obj\Debug\TavlamaBenzetimi.pdb
+C:\Users\ozgur\Downloads\4\TavlamaBenzetimi\bin\Debug\TavlamaBenzetimi.exe.config
+C:\Users\ozgur\Downloads\4\TavlamaBenzetimi\bin\Debug\TavlamaBenzetimi.exe
+C:\Users\ozgur\Downloads\4\TavlamaBenzetimi\bin\Debug\TavlamaBenzetimi.pdb
+C:\Users\ozgur\Downloads\4\TavlamaBenzetimi\obj\Debug\TavlamaBenzetimi.csprojAssemblyReference.cache
+C:\Users\ozgur\Downloads\4\TavlamaBenzetimi\obj\Debug\TavlamaBenzetimi.csproj.CoreCompileInputs.cache
+C:\Users\ozgur\Downloads\4\TavlamaBenzetimi\obj\Debug\TavlamaBenzetimi.exe
+C:\Users\ozgur\Downloads\4\TavlamaBenzetimi\obj\Debug\TavlamaBenzetimi.pdb

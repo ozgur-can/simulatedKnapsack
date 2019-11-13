@@ -16,6 +16,7 @@ namespace KnapsackTB
             double BASLANGIC_SICAKLIGI = 0;
             double DURDURMA_SICAKLIGI = 0;
             int ADIM_SAYISI = 0;
+            int DENEME_SAYISI = 10;
 
             VeriOkuma veri = new VeriOkuma();
 
@@ -30,10 +31,11 @@ namespace KnapsackTB
                 TavlamaBenzetimi tb = new TavlamaBenzetimi(veri.elemanlarListesi("test" + i + ".txt"), veri.Kapasite, BASLANGIC_SICAKLIGI, DURDURMA_SICAKLIGI);
 
                 Console.WriteLine("test" + i + ".txt");
-                for (int j = 0; j < 10; j++)
+                for (int j = 0; j < DENEME_SAYISI; j++)
                 {
                     tb.Tavlama(ADIM_SAYISI, "test" + i + "_4_results.txt");
-                    tb.CiktiVer(tb.EnIyiCozumlerListesi, tb.ZamanFarklariListesi, "test" + i + "_4_results.txt");
+                    if (j == DENEME_SAYISI - 1)
+                        tb.CiktiVer(tb.EnIyiCozumlerListesi, tb.ZamanFarklariListesi, "test" + i + "_4_results.txt");
                 }
 
             }

@@ -140,7 +140,7 @@ namespace KnapsackTB
             List<int> yeniCozum = new List<int>();
             int agirlik = 0;
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 10; i++)
             {
                 rast = RastgeleSecim(secilmemis);
                 yedekTemp.Add(rast);

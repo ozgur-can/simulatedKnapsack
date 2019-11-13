@@ -16,7 +16,7 @@ namespace KnapsackTB
 
             StreamWriter sw = new StreamWriter(fs);
 
-            sw.WriteLine(ortalamaDeger + " " + enIyiDeger + " " + sure.ToString());
+            sw.WriteLine(ortalamaDeger + " " + enIyiDeger + " " + sure.TotalMilliseconds);
 
             sw.Flush();
             sw.Close();
