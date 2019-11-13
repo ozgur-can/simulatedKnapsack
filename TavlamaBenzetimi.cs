@@ -16,12 +16,15 @@ namespace KnapsackTB
         private double baslangicISI;
         private double durdurmaISI;
         RastgeleSayi rastgele = new RastgeleSayi();
-
+        List<List<int>> enIyiCozumlerListesi = new List<List<int>>();
+        List<TimeSpan> zamanFarklariListesi = new List<TimeSpan>();
         public int Kapasite { get => kapasite; set => kapasite = value; }
         public List<Eleman> Elemanlar { get => elemanlar; set => elemanlar = value; }
         public double BaslangicISI { get => baslangicISI; set => baslangicISI = value; }
         public double DurdurmaISI { get => durdurmaISI; set => durdurmaISI = value; }
         public RastgeleSayi Rastgele { get => rastgele; set => rastgele = value; }
+        public List<List<int>> EnIyiCozumlerListesi { get => enIyiCozumlerListesi; set => enIyiCozumlerListesi = value; }
+        public List<TimeSpan> ZamanFarklariListesi { get => zamanFarklariListesi; set => zamanFarklariListesi = value; }
 
         public TavlamaBenzetimi(List<Eleman> elemanlar, int kapasite, double baslangicISI, double durdurmaISI)
         {
@@ -54,20 +57,10 @@ namespace KnapsackTB
 
             return ilkCozum;
         }
-
-        public List<int> DeepCopy<List>(List<int> item)
+        public void Tavlama(int adimSayisi, string dosyaAdi)
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            MemoryStream stream = new MemoryStream();
-            formatter.Serialize(stream, item);
-            stream.Seek(0, SeekOrigin.Begin);
-            List<int> result = (List<int>)formatter.Deserialize(stream);
-            stream.Close();
-            return result;
-        }
+            RastgeleSayi rastgele = new RastgeleSayi();
 
-        public void Tavlama()
-        {
             //sure baslangic
             DateTime sureBas = DateTime.Now;
 
@@ -85,10 +78,10 @@ namespace KnapsackTB
             do
             {
                 guncelDeger = DegerHesapla(enIyiCozum);
-                for (int i = 0; i <= 100; i++)
+                for (int i = 0; i <= adimSayisi; i++)
                 {
                     komsu = VaryasyonlariHesapla(yeniCozum);
-                    //guncelDeger = DegerHesapla(komsu);
+                    guncelDeger = DegerHesapla(komsu);
                     fark = DegerHesapla(komsu) - enIyiDeger;
                     if (fark >= 0)
                     {
@@ -98,30 +91,49 @@ namespace KnapsackTB
                     }
                     else
                     {
-                        if (Math.Exp(-fark / BaslangicISI) > 0)
+                        if (Math.Exp(-fark / BaslangicISI) > rastgele.BetweenDouble(0, 1))
                         {
                             yeniCozum = komsu;
                         }
                     }
                     BaslangicISI -= 0.1;
                 }
-            } while ((BaslangicISI > DurdurmaISI) || (guncelDeger < enIyiDeger));
+            } while ((BaslangicISI > DurdurmaISI) && (guncelDeger < enIyiDeger));
 
             //sure bitis
             TimeSpan zamanFarki = DateTime.Now - sureBas;
 
-            foreach (var i in SecilmisElemanlar(enIyiCozum))
-                Console.Write(i + " ");
+            EnIyiCozumlerListesi.Add(enIyiCozum);
+            ZamanFarklariListesi.Add(zamanFarki);
 
-            Console.WriteLine("\nDegerler toplami = " + DegerHesapla(enIyiCozum));
-            Console.WriteLine("Amac Fonksiyonu Degeri = " + DegerHesapla(enIyiCozum) * HacimHesapla(enIyiCozum));
-            Console.WriteLine("Sure: " + zamanFarki.TotalMilliseconds);
+            Console.WriteLine(DegerHesapla(enIyiCozum) + " " + HacimHesapla(enIyiCozum) + " " + zamanFarki.TotalMilliseconds);
+        }
+
+        public void CiktiVer(List<List<int>> enIyiCozum, List<TimeSpan> zamanFarki, string dosyaAdi)
+        {
+            Dictionary<double, TimeSpan> ciktilar = new Dictionary<double, TimeSpan>();
+            double toplamDeger = 0, ortalamaDeger;
+
+            for (int i = 0; i < enIyiCozum.Count; i++)
+            {
+                ciktilar.Add(DegerHesapla(enIyiCozum[i]), zamanFarki[i]);
+            }
+
+            for (int i = 0; i < ciktilar.Count; i++)
+                toplamDeger += ciktilar.ElementAt(i).Key;
+
+            ortalamaDeger = toplamDeger / ciktilar.Count;
+
+            double enIyiCiktiDegeri = ciktilar.Keys.Max();
+            TimeSpan enIyiCiktiSuresi = ciktilar[enIyiCiktiDegeri];
+
+            DosyayaYazdir dosya = new DosyayaYazdir();
+            dosya.Yaz(dosyaAdi, ortalamaDeger, ciktilar.Keys.Max(), enIyiCiktiSuresi);
         }
 
         public List<int> VaryasyonlariHesapla(List<int> tempCozum)
         {
-            List<int> yedekTemp = new List<int>(tempCozum); // yedek tuttum cunku tutmazsan parametredeki listeyi guncelliyor
-            //int rastgele = RastgeleSayiGetir(Elemanlar.Count);
+            List<int> yedekTemp = new List<int>(tempCozum);
             int rast = 0;
             List<int> baslangicCozum = new List<int>(yedekTemp);
             List<int> secilmemis = SecilmemislerElemanlar(yedekTemp);
@@ -175,13 +187,6 @@ namespace KnapsackTB
                 if (cozum.Contains(Elemanlar[i].Indis))
                     secilmisler.Add(Elemanlar[i].Indis);
 
-            //Elemanlar 0 1 2 3
-            //cozum 0 1 3
-            //secilmemisler 2
-
-            //foreach (var i in secilmemisler)
-            //    Console.WriteLine(i);
-
             return secilmisler;
         }
 
@@ -191,13 +196,6 @@ namespace KnapsackTB
             for (int i = 0; i < Elemanlar.Count; i++)
                 if (!cozum.Contains(Elemanlar[i].Indis))
                     secilmemisler.Add(Elemanlar[i].Indis);
-
-            //Elemanlar 0 1 2 3
-            //cozum 0 1 3
-            //secilmemisler 2
-
-            //foreach (var i in secilmemisler)
-            //    Console.WriteLine(i);
 
             return secilmemisler;
         }
