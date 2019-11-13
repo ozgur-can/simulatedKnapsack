@@ -1,0 +1,7 @@
+C:\Users\ozgur\Desktop\TavlamaBenzetimi\bin\Debug\TavlamaBenzetimi.exe.config
+C:\Users\ozgur\Desktop\TavlamaBenzetimi\bin\Debug\TavlamaBenzetimi.exe
+C:\Users\ozgur\Desktop\TavlamaBenzetimi\bin\Debug\TavlamaBenzetimi.pdb
+C:\Users\ozgur\Desktop\TavlamaBenzetimi\obj\Debug\TavlamaBenzetimi.csprojAssemblyReference.cache
+C:\Users\ozgur\Desktop\TavlamaBenzetimi\obj\Debug\TavlamaBenzetimi.csproj.CoreCompileInputs.cache
+C:\Users\ozgur\Desktop\TavlamaBenzetimi\obj\Debug\TavlamaBenzetimi.exe
+C:\Users\ozgur\Desktop\TavlamaBenzetimi\obj\Debug\TavlamaBenzetimi.pdb

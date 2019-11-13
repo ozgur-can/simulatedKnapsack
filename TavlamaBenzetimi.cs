@@ -66,8 +66,13 @@ namespace KnapsackTB
             return result;
         }
 
-        public void Tavlama(List<int> cozum)
+        public void Tavlama()
         {
+            //sure baslangic
+            DateTime sureBas = DateTime.Now;
+
+            List<int> cozum = new List<int>(IlkCozum());
+
             int fark;
             int guncelDeger;
 
@@ -79,33 +84,38 @@ namespace KnapsackTB
 
             do
             {
-                komsu = VaryasyonlariHesapla(yeniCozum);
-                guncelDeger = DegerHesapla(komsu);
-                fark = DegerHesapla(komsu) - enIyiDeger;
-                if (fark >= 0)
+                guncelDeger = DegerHesapla(enIyiCozum);
+                for (int i = 0; i <= 100; i++)
                 {
-                    enIyiCozum = komsu;
-                    enIyiDeger = DegerHesapla(enIyiCozum);
-                    yeniCozum = komsu;
-                }
-                else
-                {
-                    if (Math.Exp(-fark / BaslangicISI) > 0)
+                    komsu = VaryasyonlariHesapla(yeniCozum);
+                    //guncelDeger = DegerHesapla(komsu);
+                    fark = DegerHesapla(komsu) - enIyiDeger;
+                    if (fark >= 0)
                     {
+                        enIyiCozum = komsu;
+                        enIyiDeger = DegerHesapla(enIyiCozum);
                         yeniCozum = komsu;
                     }
+                    else
+                    {
+                        if (Math.Exp(-fark / BaslangicISI) > 0)
+                        {
+                            yeniCozum = komsu;
+                        }
+                    }
+                    BaslangicISI -= 0.1;
                 }
-                BaslangicISI -= 0.1;
+            } while ((BaslangicISI > DurdurmaISI) || (guncelDeger < enIyiDeger));
 
-            } while ((BaslangicISI > DurdurmaISI) && (guncelDeger < enIyiDeger));
-
+            //sure bitis
+            TimeSpan zamanFarki = DateTime.Now - sureBas;
 
             foreach (var i in SecilmisElemanlar(enIyiCozum))
                 Console.Write(i + " ");
 
             Console.WriteLine("\nDegerler toplami = " + DegerHesapla(enIyiCozum));
             Console.WriteLine("Amac Fonksiyonu Degeri = " + DegerHesapla(enIyiCozum) * HacimHesapla(enIyiCozum));
-
+            Console.WriteLine("Sure: " + zamanFarki.TotalMilliseconds);
         }
 
         public List<int> VaryasyonlariHesapla(List<int> tempCozum)
